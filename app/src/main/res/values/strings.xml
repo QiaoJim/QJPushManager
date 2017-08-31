@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">QJPushService</string>
+    <string name="text_btn_on_push">打开Push</string>
+
+    <!-- 消息成功率统计： 通道将消息转发给SDK后，SDK通知通道消息已接收到 -->
+    <string name="hwpush_ability_value" translatable="false">successRateAnalytics</string>
+
+</resources>
