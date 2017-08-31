@@ -5,6 +5,9 @@
 2、通知栏点击：可获取标题、正文、附加值;     
 3、服务出错;  
   
-3方push准备和QJPushService详细使用参考博客：      
-准备阶段：http://blog.csdn.net/qiao_jim/article/details/73146673    
-使用：http://blog.csdn.net/qiao_jim/article/details/77742936    
+test/MainActivity.java是封装后的 jar 包的使用实例
+
+3方push准备和QJPushService详细使用参考博客：     
+准备阶段：http://blog.csdn.net/qiao_jim/article/details/73146673  
+使用：http://blog.csdn.net/qiao_jim/article/details/77742936    
+jar包下载地址：http://download.csdn.net/download/qiao_jim/9957319
