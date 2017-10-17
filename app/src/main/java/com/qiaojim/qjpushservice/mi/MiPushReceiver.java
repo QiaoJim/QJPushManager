@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.qiaojim.qjpushservice.entity.QJConstant;
 import com.qiaojim.qjpushservice.entity.QJMessage;
+import com.qiaojim.qjpushservice.utils.QJBroadcastUtil;
 import com.xiaomi.mipush.sdk.ErrorCode;
 import com.xiaomi.mipush.sdk.MiPushClient;
 import com.xiaomi.mipush.sdk.MiPushCommandMessage;
@@ -48,12 +49,15 @@ public class MiPushReceiver extends PushMessageReceiver {
             mTips += mAlias;
         }
 
-        Log.w(QJConstant.MI_TAG, "==== onNotificationMessageArrived ====\n " + mTips);
+        Log.w(QJConstant.MI_TAG, "==== onNotificationMessageArrived ====\n " + message.getTitle());
 
         QJMessage qjMessage = new QJMessage();
         qjMessage.setTitle(message.getTitle());
         qjMessage.setBody(message.getDescription());
         qjMessage.setExtra(message.toString());
+
+        Log.e("QJ","onNotificationArrived\n本地广播1  准备发送");
+        QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.MSG_ARRIVED);
     }
 
     @Override
@@ -63,6 +67,9 @@ public class MiPushReceiver extends PushMessageReceiver {
         qjMessage.setTitle(message.getTitle());
         qjMessage.setBody(message.getDescription());
         qjMessage.setExtra(message.toString());
+
+        Log.e("QJ","onNotificationArrived\n本地广播2  准备发送");
+        QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.NOTIFICATION_CLICKED);
     }
 
     @Override
