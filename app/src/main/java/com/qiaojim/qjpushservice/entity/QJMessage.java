@@ -7,9 +7,19 @@ import java.io.Serializable;
  */
 
 public class QJMessage implements Serializable{
+
+    private String msgType;
     private String title;
     private String body;
     private Object extra;
+
+    public String getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(String msgType) {
+        this.msgType = msgType;
+    }
 
     public String getTitle() {
         return title;

@@ -27,6 +27,8 @@ import com.qiaojim.qjpushservice.huawei.HuaweiPushReceiver;
 import com.qiaojim.qjpushservice.mi.MiPushReceiver;
 import com.qiaojim.qjpushservice.utils.QJBroadcastUtil;
 
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity implements QJPushListener.QJHuaweiListener, QJPushListener {
 
     private Button start;
@@ -162,7 +164,13 @@ public class MainActivity extends AppCompatActivity implements QJPushListener.QJ
 
 @Override
 public void onMsgArrived(QJMessage msg) {
-    Toast.makeText(this, msg.getBody(), Toast.LENGTH_SHORT).show();
+    String msgType = msg.getMsgType();
+    if (msgType.equals(QJConstant.TYPE_PASS_THROUGH)){
+        Map<String,String> extra= (Map<String, String>) msg.getExtra();
+        Log.e("PassThrough","************\n"+
+        extra.get("msgType")+"   "+extra.get("money"));
+//        Toast.makeText(this, extra.get("msgType"), Toast.LENGTH_SHORT).show();
+    }
 }
 
 @Override

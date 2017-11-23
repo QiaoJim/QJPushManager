@@ -24,6 +24,7 @@ public class QJBroadcastUtil {
      */
     public static void regQJReceiver(Context context, QJPushReceiver qjPushReceiver, QJPushListener listener){
         IntentFilter filter=new IntentFilter();
+        filter.addAction(QJConstant.QJPUSH_BROADCAST0);
         filter.addAction(QJConstant.QJPUSH_BROADCAST1);
         filter.addAction(QJConstant.QJPUSH_BROADCAST2);
         filter.addAction(QJConstant.QJPUSH_BROADCAST3);
@@ -56,6 +57,9 @@ public class QJBroadcastUtil {
         LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(context);
         Intent intent = null;
         switch (broadType) {
+            case QJConstant.PASS_THROUGH:
+                intent = new Intent(QJConstant.QJPUSH_BROADCAST0);
+                break;
             case QJConstant.MSG_ARRIVED:
                 intent = new Intent(QJConstant.QJPUSH_BROADCAST1);
                 break;

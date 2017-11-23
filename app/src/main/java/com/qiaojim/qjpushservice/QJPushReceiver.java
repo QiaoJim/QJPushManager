@@ -8,6 +8,8 @@ import android.util.Log;
 import com.qiaojim.qjpushservice.entity.QJConstant;
 import com.qiaojim.qjpushservice.entity.QJMessage;
 
+import java.util.Map;
+
 /**
  * Created by QiaoJim on 2017/8/29.
  */
@@ -25,11 +27,17 @@ public class QJPushReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         QJMessage message= (QJMessage) intent.getExtras().get(QJConstant.QJMESSAGE_KEY);
-        if (message!=null) {
+        /*if (message!=null) {
             Log.e("QJ","onReceive\nQJMessage : "+message.getTitle()+"   "+message.getBody());
-        }
+        }*/
         String action = intent.getAction();
         switch (action){
+            case QJConstant.QJPUSH_BROADCAST0:
+                if (listener!=null){
+                    listener.onMsgArrived(message);
+                    Log.e("QJ","onReceive\n透传消息收到回调");
+                }
+                break;
             case QJConstant.QJPUSH_BROADCAST1:
                 if (listener!=null){
                     listener.onMsgArrived(message);

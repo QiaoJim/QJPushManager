@@ -33,8 +33,16 @@ public class MiPushReceiver extends PushMessageReceiver {
             mTips += mAlias;
         }
 
-        Log.w(QJConstant.MI_TAG, "==== onReceivePassThroughMessage ====\n " + mTips);
+        Log.w(QJConstant.MI_TAG, "==== onReceivePassThroughMessage ====\n " + message.getExtra());
 
+        QJMessage qjMessage = new QJMessage();
+        qjMessage.setMsgType(QJConstant.TYPE_PASS_THROUGH);
+        qjMessage.setTitle(message.getTitle());
+        qjMessage.setBody(message.getDescription());
+        qjMessage.setExtra(message.getExtra());
+
+        Log.e("QJ","onReceivePassThroughMessage\n本地广播3  准备发送");
+        QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.PASS_THROUGH);
     }
 
     @Override
@@ -52,9 +60,10 @@ public class MiPushReceiver extends PushMessageReceiver {
         Log.w(QJConstant.MI_TAG, "==== onNotificationMessageArrived ====\n " + message.getTitle());
 
         QJMessage qjMessage = new QJMessage();
+        qjMessage.setMsgType(QJConstant.TYPE_NOTIFICATION);
         qjMessage.setTitle(message.getTitle());
         qjMessage.setBody(message.getDescription());
-        qjMessage.setExtra(message.toString());
+        qjMessage.setExtra(message.getExtra());
 
         Log.e("QJ","onNotificationArrived\n本地广播1  准备发送");
         QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.MSG_ARRIVED);
@@ -66,7 +75,7 @@ public class MiPushReceiver extends PushMessageReceiver {
         QJMessage qjMessage = new QJMessage();
         qjMessage.setTitle(message.getTitle());
         qjMessage.setBody(message.getDescription());
-        qjMessage.setExtra(message.toString());
+        qjMessage.setExtra(message.getExtra());
 
         Log.e("QJ","onNotificationArrived\n本地广播2  准备发送");
         QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.NOTIFICATION_CLICKED);
