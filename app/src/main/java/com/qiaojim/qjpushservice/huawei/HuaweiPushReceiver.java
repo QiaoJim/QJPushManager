@@ -21,7 +21,7 @@ public class HuaweiPushReceiver extends PushReceiver {
     public void onToken(Context context, String token, Bundle extras) {
         String belongId = extras.getString("belongId");
         String content = "get token and belongId successful, token = " + token + ",belongId = " + belongId;
-        Log.i(QJConstant.HUAWEI_TAG, "===== onToken ======\n"+content);
+        Log.i(QJConstant.HUAWEI_TAG, "===== onToken ======\n" + content);
 
     }
 
@@ -29,13 +29,14 @@ public class HuaweiPushReceiver extends PushReceiver {
     public boolean onPushMsg(Context context, byte[] msg, Bundle bundle) {
         try {
             String content = "Receive a Push pass-by message： " + new String(msg, "UTF-8");
-            Log.i(QJConstant.HUAWEI_TAG, "===== onPushMsg ======\n"+content);
+            Log.i(QJConstant.HUAWEI_TAG, "===== onPushMsg ======\n" + content);
 
-            QJMessage qjMessage=new QJMessage();
+            QJMessage qjMessage = new QJMessage();
+            qjMessage.setRomType(QJConstant.HUAWEI_TAG);
+            qjMessage.setMsgType(QJConstant.TYPE_PASS_THROUGH);
             qjMessage.setBody(new String(msg, "UTF-8"));
-            qjMessage.setExtra(bundle);
 
-            Log.e("QJ","onNotificationArrived\n本地广播1  准备发送");
+            Log.e("QJ", "onNotificationArrived\n本地广播1  准备发送");
             QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.MSG_ARRIVED);
 
             return true;
@@ -48,22 +49,17 @@ public class HuaweiPushReceiver extends PushReceiver {
 
     public void onEvent(Context context, Event event, Bundle extras) {
         String content = "receive extented notification message: " + extras.getString(BOUND_KEY.pushMsgKey);
-        Log.i(QJConstant.HUAWEI_TAG, "===== onEvent ======\n"+content);
+        Log.i(QJConstant.HUAWEI_TAG, "===== onEvent ======\n" + content);
 
         //打开通知栏消息或点击，关闭通知栏
         if (Event.NOTIFICATION_OPENED.equals(event) || Event.NOTIFICATION_CLICK_BTN.equals(event)) {
-            int notifyId = extras.getInt(BOUND_KEY.pushNotifyId, 0);
-            if (0 != notifyId) {
-                NotificationManager manager = (NotificationManager) context
-                        .getSystemService(Context.NOTIFICATION_SERVICE);
-                manager.cancel(notifyId);
 
-                QJMessage qjMessage=new QJMessage();
-                qjMessage.setExtra(extras);
-
-                Log.e("QJ","onNotificationArrived\n本地广播2  准备发送");
-                QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.NOTIFICATION_CLICKED);
-               }
+            QJMessage qjMessage = new QJMessage();
+            qjMessage.setRomType(QJConstant.HUAWEI_TAG);
+            qjMessage.setMsgType(QJConstant.TYPE_NOTIFICATION);
+            qjMessage.setExtra(extras.getString(BOUND_KEY.pushMsgKey));
+            Log.e("QJ", "onNotificationArrived\n本地广播2  准备发送");
+            QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.NOTIFICATION_CLICKED);
 
         }
     }
@@ -72,7 +68,7 @@ public class HuaweiPushReceiver extends PushReceiver {
     public void onPushState(Context context, boolean pushState) {
         try {
             String content = "The current push status： " + (pushState ? "Connected" : "Disconnected");
-            Log.i(QJConstant.HUAWEI_TAG, "===== onPushState ======\n"+content);
+            Log.i(QJConstant.HUAWEI_TAG, "===== onPushState ======\n" + content);
 
         } catch (Exception e) {
             e.printStackTrace();

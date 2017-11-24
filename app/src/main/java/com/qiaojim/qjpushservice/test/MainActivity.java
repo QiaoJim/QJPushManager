@@ -165,8 +165,26 @@ public class MainActivity extends AppCompatActivity implements QJPushListener.QJ
     @Override
     public void onMsgArrived(QJMessage msg) {
         String msgType = msg.getMsgType();
+        //透传消息
         if (msgType.equals(QJConstant.TYPE_PASS_THROUGH)) {
-            Map<String, String> extra = (Map<String, String>) msg.getExtra();
+            String romType = msg.getRomType();
+            switch (romType){
+                case QJConstant.MI_TAG:
+
+                    break;
+                case QJConstant.HUAWEI_TAG:
+
+                    break;
+                case QJConstant.BAIDU_TAG:
+
+                    break;
+                default:
+
+            }
+        }
+        //通知栏消息
+        else if (msgType.equals(QJConstant.TYPE_NOTIFICATION)){
+
         }
     }
 

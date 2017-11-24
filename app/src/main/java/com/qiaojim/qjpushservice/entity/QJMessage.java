@@ -8,10 +8,19 @@ import java.io.Serializable;
 
 public class QJMessage implements Serializable{
 
+    private String romType; //rom型号 Xiaomi Baidu Huawei
     private String msgType; //推送消息类型
     private String title;   //通知栏消息推送标题，透传为null
     private String body;    //通知栏消息内容，透传唯消息一有效值
     private Object extra;   //通知栏消息附加key-value字段，透传null
+
+    public String getRomType() {
+        return romType;
+    }
+
+    public void setRomType(String romType) {
+        this.romType = romType;
+    }
 
     public String getMsgType() {
         return msgType;
