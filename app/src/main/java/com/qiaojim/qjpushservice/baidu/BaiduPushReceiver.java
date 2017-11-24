@@ -66,6 +66,12 @@ public class BaiduPushReceiver extends PushMessageReceiver {
                 + "\" customContentString=" + customContentString;
         Log.i(QJConstant.BAIDU_TAG, "========= onMessage ============\n"+messageString);
 
+        QJMessage qjMessage = new QJMessage();
+        qjMessage.setMsgType(QJConstant.TYPE_PASS_THROUGH);
+        qjMessage.setBody(message);
+        Log.e("QJ","onNotificationArrived\n本地广播2  准备发送");
+        QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.PASS_THROUGH);
+
         /*
         // 自定义内容获取方式，透传消息推送时自定义内容中设置的键和值,键名为QJPushKey
         if (!TextUtils.isEmpty(customContentString)) {

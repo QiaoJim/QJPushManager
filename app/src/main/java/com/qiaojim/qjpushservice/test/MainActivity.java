@@ -162,24 +162,19 @@ public class MainActivity extends AppCompatActivity implements QJPushListener.QJ
         }
     }
 
-@Override
-public void onMsgArrived(QJMessage msg) {
-    String msgType = msg.getMsgType();
-    if (msgType.equals(QJConstant.TYPE_PASS_THROUGH)){
-        Map<String,String> extra= (Map<String, String>) msg.getExtra();
-        Log.e("PassThrough","************\n"+
-        extra.get("msgType")+"   "+extra.get("money"));
-//        Toast.makeText(this, extra.get("msgType"), Toast.LENGTH_SHORT).show();
+    @Override
+    public void onMsgArrived(QJMessage msg) {
+        String msgType = msg.getMsgType();
+        if (msgType.equals(QJConstant.TYPE_PASS_THROUGH)) {
+            Map<String, String> extra = (Map<String, String>) msg.getExtra();
+        }
     }
-}
 
-@Override
-public void onNotificationClicked(QJMessage msg) {
-    Toast.makeText(this, msg.getBody(), Toast.LENGTH_SHORT).show();
-}
+    @Override
+    public void onNotificationClicked(QJMessage msg) {
+    }
 
-@Override
-public void onError() {
-    Toast.makeText(this, "出现错误", Toast.LENGTH_SHORT).show();
-}
+    @Override
+    public void onError() {
+    }
 }
