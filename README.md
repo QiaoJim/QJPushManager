@@ -1,4 +1,5 @@
 # QJPushService
+QJPushService.jar在/app目录下，可免费下载使用，有问题可随时提问
 小米，百度，华为消息推送服务的整合，封装成QJPushService，简化push接入步骤。<br>
 使用QJPushService，开发者能控制:     
 1、推送消息到达：可获取标题、正文、附加值;  
