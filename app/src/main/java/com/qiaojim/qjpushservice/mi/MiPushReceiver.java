@@ -33,8 +33,7 @@ public class MiPushReceiver extends PushMessageReceiver {
             mTips += mAlias;
         }
 
-        Log.w(QJConstant.MI_TAG, "==== onReceivePassThroughMessage ====\n " + message.getContent());
-        Log.w(QJConstant.MI_TAG, "==== onReceivePassThroughMessage ====\n " + message.getExtra());
+        Log.w(QJConstant.MI_TAG, "==== onReceivePassThroughMessage ====\n " + message.getContent()+"\n"+message.getExtra());
 
         QJMessage qjMessage = new QJMessage();
         qjMessage.setRomType(QJConstant.MI_TAG);
@@ -42,7 +41,6 @@ public class MiPushReceiver extends PushMessageReceiver {
         qjMessage.setBody(message.getContent());
         qjMessage.setExtra(message.getExtra());
 
-        Log.e("QJ","onReceivePassThroughMessage\n本地广播3  准备发送");
         QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.PASS_THROUGH);
     }
 
@@ -58,9 +56,8 @@ public class MiPushReceiver extends PushMessageReceiver {
             mTips += mAlias;
         }
 
-        Log.w(QJConstant.MI_TAG, "==== onNotificationMessageArrived ====\n " + message.getTitle());
-        Log.w(QJConstant.MI_TAG, "==== onNotificationMessageArrived ====\n " + message.getDescription());
-        Log.w(QJConstant.MI_TAG, "==== onNotificationMessageArrived ====\n " + message.getExtra());
+        Log.w(QJConstant.MI_TAG, "==== onNotificationMessageArrived ====\n " + message.getTitle() +
+                "\n"+message.getDescription()+"\n"+message.getExtra());
 
         QJMessage qjMessage = new QJMessage();
         qjMessage.setRomType(QJConstant.MI_TAG);
@@ -69,7 +66,6 @@ public class MiPushReceiver extends PushMessageReceiver {
         qjMessage.setBody(message.getDescription());
         qjMessage.setExtra(message.getExtra());
 
-        Log.e("QJ","onNotificationArrived\n本地广播1  准备发送");
         QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.MSG_ARRIVED);
     }
 
@@ -82,7 +78,6 @@ public class MiPushReceiver extends PushMessageReceiver {
         qjMessage.setBody(message.getDescription());
         qjMessage.setExtra(message.getExtra());
 
-        Log.e("QJ","onNotificationArrived\n本地广播2  准备发送");
         QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.NOTIFICATION_CLICKED);
     }
 

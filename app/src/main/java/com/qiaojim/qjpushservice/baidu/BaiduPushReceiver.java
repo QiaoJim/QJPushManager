@@ -70,7 +70,7 @@ public class BaiduPushReceiver extends PushMessageReceiver {
         qjMessage.setRomType(QJConstant.BAIDU_TAG);
         qjMessage.setMsgType(QJConstant.TYPE_PASS_THROUGH);
         qjMessage.setBody(message);
-        Log.e("QJ","onNotificationArrived\n本地广播2  准备发送");
+        qjMessage.setExtra(customContentString);
         QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.PASS_THROUGH);
 
         /*
@@ -116,7 +116,6 @@ public class BaiduPushReceiver extends PushMessageReceiver {
         qjMessage.setTitle(title);
         qjMessage.setBody(description);
         qjMessage.setExtra(customContentString);
-        Log.e("QJ","onNotificationArrived\n本地广播1  准备发送");
         QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.MSG_ARRIVED);
 
         /*
@@ -160,7 +159,6 @@ public class BaiduPushReceiver extends PushMessageReceiver {
         qjMessage.setTitle(title);
         qjMessage.setBody(description);
         qjMessage.setExtra(customContentString);
-        Log.e("QJ","onNotificationArrived\n本地广播2  准备发送");
         QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.NOTIFICATION_CLICKED);
 
         /*

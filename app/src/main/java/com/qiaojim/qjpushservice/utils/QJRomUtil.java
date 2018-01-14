@@ -1,5 +1,6 @@
 package com.qiaojim.qjpushservice.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -24,14 +25,15 @@ public class QJRomUtil {
 
     /**
      * 准备  设置IMEI，和用户ROM，必须最先调用
+     *
      * @param context
      */
-    public static void prepare(Context context){
+    public static void prepare(Context context) {
 
         QJBuildProperties.loadProperties();
         setIMEI(context);
         setRomType();
-        Log.i(QJConstant.ROM_TAG,"rom prepare finish");
+        Log.i(QJConstant.ROM_TAG, "rom prepare finish");
     }
 
     /**
@@ -50,6 +52,7 @@ public class QJRomUtil {
 
     /**
      * 获取设备类型
+     *
      * @return 设备类型：xiaomi huawei baidu
      */
     public static ROM_TYPE getRomType() {
@@ -57,16 +60,22 @@ public class QJRomUtil {
     }
 
     /**
-     *获得设备的IMEI号，并初始化其值
+     * 获得设备的IMEI号，并初始化其值
+     *
      * @param context
      */
+    @SuppressLint("MissingPermission")
     public static void setIMEI(Context context) {
         TelephonyManager tm = (TelephonyManager) context.getSystemService(TELEPHONY_SERVICE);
-        userIMEI = tm.getDeviceId();
+        if (tm != null) {
+            userIMEI = tm.getDeviceId();
+        } else {
+            userIMEI = null;
+        }
     }
 
     /**
-     * @return  用户设备IMEI号
+     * @return 用户设备IMEI号
      */
     public static String getIMEI() {
         return userIMEI;

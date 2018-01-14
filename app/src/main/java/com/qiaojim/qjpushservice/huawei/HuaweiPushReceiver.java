@@ -35,8 +35,9 @@ public class HuaweiPushReceiver extends PushReceiver {
             qjMessage.setRomType(QJConstant.HUAWEI_TAG);
             qjMessage.setMsgType(QJConstant.TYPE_PASS_THROUGH);
             qjMessage.setBody(new String(msg, "UTF-8"));
+            qjMessage.setExtra(bundle);
 
-            Log.e("QJ", "onNotificationArrived\n本地广播1  准备发送");
+//            Log.e("QJ", "onNotificationArrived\n本地广播1  准备发送");
             QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.MSG_ARRIVED);
 
             return true;
@@ -58,7 +59,7 @@ public class HuaweiPushReceiver extends PushReceiver {
             qjMessage.setRomType(QJConstant.HUAWEI_TAG);
             qjMessage.setMsgType(QJConstant.TYPE_NOTIFICATION);
             qjMessage.setExtra(extras.getString(BOUND_KEY.pushMsgKey));
-            Log.e("QJ", "onNotificationArrived\n本地广播2  准备发送");
+//            Log.e("QJ", "onNotificationArrived\n本地广播2  准备发送");
             QJBroadcastUtil.sendQJBroad(context, qjMessage, QJConstant.NOTIFICATION_CLICKED);
 
         }

@@ -72,6 +72,5 @@ public class QJBroadcastUtil {
         }
         intent.putExtra(QJConstant.QJMESSAGE_KEY, message);
         localBroadcastManager.sendBroadcast(intent);
-        Log.e("QJ","sendQJBroad\n本地广播  已发送");
     }
 }
